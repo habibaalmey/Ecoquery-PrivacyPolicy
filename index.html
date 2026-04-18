@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoQuery — Legal &amp; Support</title>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --text-primary: #1a1a1a;
+            --text-secondary: #444;
+            --text-muted: #767676;
+            --border: #e0e0e0;
+            --border-light: #f0f0f0;
+            --bg: #fff;
+            --bg-sidebar: #fafafa;
+            --bg-code: #f5f5f5;
+            --link: #1a73e8;
+            --sidebar-w: 260px;
+            --header-h: 48px;
+        }
+
+        html { font-size: 14px; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* ── Topbar ── */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: var(--header-h);
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+        }
+
+        .topbar-brand {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-right: 32px;
+            white-space: nowrap;
+        }
+
+        .topbar-nav {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-family: inherit;
+            cursor: pointer;
+            padding: 0 14px;
+            height: var(--header-h);
+            display: flex;
+            align-items: center;
+        }
+
+        .tab-btn:hover { color: var(--text-primary); }
+
+        .tab-btn.active {
+            color: var(--text-primary);
+            font-weight: 500;
+            border-bottom-color: #1a1a1a;
+        }
+
+        .topbar-spacer { flex: 1; }
+
+        .topbar-version {
+            font-size: 12px;
+            color: var(--text-muted);
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2px 8px;
+        }
+
+        /* ── Layout ── */
+        .layout {
+            display: flex;
+            min-height: calc(100vh - var(--header-h));
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: var(--sidebar-w);
+            flex-shrink: 0;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            padding: 28px 0;
+            position: sticky;
+            top: var(--header-h);
+            height: calc(100vh - var(--header-h));
+            overflow-y: auto;
+        }
+
+        .sidebar-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            padding: 0 20px;
+            margin-bottom: 8px;
+            margin-top: 24px;
+        }
+
+        .sidebar-label:first-child { margin-top: 0; }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 5px 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            line-height: 1.5;
+        }
+
+        .sidebar-nav a:hover { color: var(--text-primary); background: var(--border-light); }
+
+        .sidebar-nav a.active {
+            color: var(--text-primary);
+            font-weight: 500;
+            border-left-color: #1a1a1a;
+            background: var(--border-light);
+        }
+
+        /* ── Tab panels ── */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* ── Main content ── */
+        .main {
+            flex: 1;
+            min-width: 0;
+            padding: 48px 64px 80px 56px;
+            max-width: 880px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .breadcrumb-sep { color: var(--border); }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+            margin-bottom: 6px;
+        }
+
+        .page-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .alert {
+            border: 1px solid var(--border);
+            border-left: 3px solid #1a1a1a;
+            background: var(--bg-code);
+            border-radius: 2px;
+            padding: 14px 18px;
+            margin-bottom: 36px;
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .alert strong { color: var(--text-primary); }
+
+        .intro {
+            font-size: 14.5px;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--border);
+            line-height: 1.8;
+        }
+
+        .section { margin-bottom: 40px; padding-bottom: 36px; border-bottom: 1px solid var(--border-light); }
+        .section:last-of-type { border-bottom: none; }
+
+        h2 { font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 14px; letter-spacing: -0.01em; }
+        h3 { font-size: 14px; font-weight: 600; color: var(--text-primary); margin: 20px 0 8px; }
+
+        p { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.8; }
+        p:last-child { margin-bottom: 0; }
+
+        ul, ol { padding-left: 20px; margin-bottom: 12px; }
+        li { font-size: 14px; color: var(--text-secondary); margin-bottom: 6px; line-height: 1.75; }
+
+        strong { color: var(--text-primary); font-weight: 600; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12.5px;
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            padding: 1px 5px;
+            color: var(--text-primary);
+        }
+
+        pre {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 14px 16px;
+            margin: 10px 0 14px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12.5px;
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* ── Tables ── */
+        .table-wrap { overflow-x: auto; margin: 16px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); border-bottom: 2px solid var(--border); padding: 8px 12px; }
+        td { padding: 10px 12px; border-bottom: 1px solid var(--border-light); color: var(--text-secondary); vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        td:first-child { font-weight: 500; color: var(--text-primary); white-space: nowrap; }
+
+        .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 3px; letter-spacing: 0.03em; }
+        .badge-opt { background: #e8f0fe; color: #1a73e8; }
+        .badge-no  { background: #f1f3f4; color: #5f6368; }
+
+        /* ── Contact block ── */
+        .contact-block {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 20px 24px;
+            margin-top: 12px;
+        }
+        .contact-block p { margin-bottom: 6px; font-size: 14px; }
+        .contact-block p:last-child { margin-bottom: 0; }
+
+        /* ── FAQ accordion ── */
+        details { border: 1px solid var(--border); border-radius: 5px; margin-bottom: 8px; overflow: hidden; }
+        summary { padding: 13px 16px; font-size: 14px; font-weight: 500; color: var(--text-primary); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-size: 18px; color: var(--text-muted); font-weight: 300; flex-shrink: 0; margin-left: 12px; }
+        details[open] summary::after { content: '\2212'; }
+        details[open] summary { border-bottom: 1px solid var(--border-light); background: var(--bg-code); }
+        .details-body { padding: 14px 16px; font-size: 14px; color: var(--text-secondary); line-height: 1.75; }
+        .details-body p { margin-bottom: 8px; }
+        .details-body p:last-child { margin-bottom: 0; }
+
+        /* ── Quick cards ── */
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 40px; }
+        .card { border: 1px solid var(--border); border-radius: 6px; padding: 18px 20px; text-decoration: none; color: var(--text-primary); transition: border-color 0.15s, background 0.15s; display: block; }
+        .card:hover { border-color: #aaa; background: var(--bg-code); }
+        .card-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+        /* ── Steps ── */
+        .step-block { margin: 12px 0; }
+        .step { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border-light); align-items: flex-start; }
+        .step:last-child { border-bottom: none; }
+        .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--text-primary); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+        .step-body { flex: 1; }
+        .step-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+        .step-desc { font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; }
+
+        /* ── Helpful + footer ── */
+        .helpful { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); margin: 40px 0 0; }
+        .helpful span { font-size: 13px; color: var(--text-muted); }
+        .helpful-btn { font-size: 13px; font-weight: 500; color: var(--link); background: none; border: 1px solid var(--border); border-radius: 4px; padding: 4px 14px; cursor: pointer; font-family: inherit; }
+        .helpful-btn:hover { background: var(--bg-code); }
+
+        .page-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+        .page-footer p { font-size: 12px; color: var(--text-muted); margin: 0; }
+        .footer-links { display: flex; gap: 16px; align-items: center; }
+        .footer-links a { font-size: 12px; color: var(--text-muted); }
+        .footer-links a:hover { color: var(--text-primary); }
+
+        /* ── Responsive ── */
+        @media (max-width: 860px) {
+            .sidebar { display: none; }
+            .main { padding: 32px 24px 60px; }
+            .cards { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 500px) {
+            .page-title { font-size: 22px; }
+            .cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Topbar -->
+<header class="topbar">
+    <a class="topbar-brand" href="#">EcoQuery</a>
+    <nav class="topbar-nav">
+        <button class="tab-btn active" onclick="switchTab('privacy', this)">Privacy Policy</button>
+        <button class="tab-btn" onclick="switchTab('support', this)">Support</button>
+    </nav>
+    <div class="topbar-spacer"></div>
+    <span class="topbar-version">v1.3.0</span>
+</header>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <!-- Privacy sidebar -->
+        <div id="sidebar-privacy">
+            <div class="sidebar-label">On this page</div>
+            <nav class="sidebar-nav" id="nav-privacy">
+                <a href="#overview">Overview</a>
+                <a href="#s1">1. Information We Collect</a>
+                <a href="#s2">2. Use of Information</a>
+                <a href="#s3">3. Storage and Security</a>
+                <a href="#s4">4. Sharing and Disclosure</a>
+                <a href="#s5">5. Chrome Permissions</a>
+                <a href="#s6">6. Limited Use Compliance</a>
+                <a href="#s7">7. Your Rights and Choices</a>
+                <a href="#s8">8. Data Retention</a>
+                <a href="#s9">9. Children's Privacy</a>
+                <a href="#s10">10. International Transfers</a>
+                <a href="#s11">11. Policy Changes</a>
+                <a href="#s12">12. Contact</a>
+            </nav>
+            <div class="sidebar-label">Resources</div>
+            <nav class="sidebar-nav">
+                <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use/" target="_blank" rel="noopener">CWS Limited Use Policy</a>
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>
+            </nav>
+        </div>
+
+        <!-- Support sidebar -->
+        <div id="sidebar-support" style="display:none;">
+            <div class="sidebar-label">On this page</div>
+            <nav class="sidebar-nav" id="nav-support">
+                <a href="#getting-started">Getting Started</a>
+                <a href="#faq">Frequently Asked Questions</a>
+                <a href="#troubleshooting">Troubleshooting</a>
+                <a href="#data-privacy">Data and Privacy</a>
+                <a href="#contact-support">Contact Support</a>
+            </nav>
+            <div class="sidebar-label">Legal</div>
+            <nav class="sidebar-nav">
+                <a href="#" onclick="switchTab('privacy', document.querySelectorAll('.tab-btn')[0]); return false;">Privacy Policy</a>
+            </nav>
+        </div>
+
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- ════════════════════════════════
+             PRIVACY POLICY TAB
+        ════════════════════════════════ -->
+        <div id="tab-privacy" class="tab-panel active">
+
+            <div class="breadcrumb">
+                <span>EcoQuery</span>
+                <span class="breadcrumb-sep">/</span>
+                <span>Legal</span>
+                <span class="breadcrumb-sep">/</span>
+                <span>Privacy Policy</span>
+            </div>
+
+            <h1 class="page-title">Privacy Policy</h1>
+            <p class="page-meta">Last updated: April 18, 2026 &nbsp; Applies to EcoQuery Chrome Extension v1.3.0 and later</p>
+
+            <div class="alert">
+                <strong>Key commitment:</strong> EcoQuery does not collect, store, or transmit the content of your ChatGPT conversations. Only anonymised numerical metrics such as estimated token counts and derived environmental calculations are ever processed or retained.
+            </div>
+
+            <p class="intro" id="overview">
+                EcoQuery is committed to protecting your privacy and handling your information transparently and responsibly. This Privacy Policy describes what data the EcoQuery Chrome Extension (the "Extension") collects, why it collects it, how it is used, and the choices available to you.<br><br>
+                By installing or using the Extension, you acknowledge that you have read and understood this policy. If you do not agree with these practices, please do not install or use the Extension.
+            </p>
+
+            <div class="section" id="s1">
+                <h2>1. Information We Collect</h2>
+                <p>EcoQuery collects only the minimum data necessary to provide its functionality. No conversation content is ever accessed or stored.</p>
+                <h3>Usage Metrics</h3>
+                <p>The number of ChatGPT queries submitted per day, estimated token counts, and derived environmental impact figures including estimated CO2 emissions (grams), energy consumption (watt-hours), and water usage (millilitres).</p>
+                <h3>User Preferences</h3>
+                <p>Your selected daily usage goal (Easy, Medium, Hard, or Custom), notification settings, and configured alert thresholds.</p>
+                <h3>Account Information (Optional)</h3>
+                <p>If you choose to create an account to enable cross-device synchronisation, we collect your email address and a unique user identifier. Account creation is entirely optional and is not required to use the Extension.</p>
+                <p><strong>What we do not collect:</strong> EcoQuery does not access, read, store, or transmit the text content of your ChatGPT conversations, your browsing history on any other website, or any financial or health information.</p>
+            </div>
+
+            <div class="section" id="s2">
+                <h2>2. Use of Information</h2>
+                <p>All information collected is used exclusively for the following purposes:</p>
+                <ul>
+                    <li>Calculating and displaying real-time environmental impact estimates (CO2, energy, water) within the Extension interface.</li>
+                    <li>Tracking your progress toward self-defined daily usage goals.</li>
+                    <li>Persisting your preferences and settings across browser sessions using Chrome's local storage API.</li>
+                    <li>Delivering optional notifications when you approach or exceed your configured usage threshold.</li>
+                    <li>Enabling cross-device synchronisation of metrics and preferences when signed in to an account.</li>
+                    <li>Improving the accuracy of environmental impact estimation models over time.</li>
+                </ul>
+                <p>We do not use your data for advertising, profiling, or any purpose not described in this policy.</p>
+            </div>
+
+            <div class="section" id="s3">
+                <h2>3. Data Storage and Security</h2>
+                <h3>Local Storage</h3>
+                <p>Usage metrics and preferences are stored locally on your device using Chrome's built-in <code>chrome.storage</code> API. This data is isolated to the Extension and is not accessible to other applications or websites.</p>
+                <h3>Cloud Storage (Optional, Signed-In Users Only)</h3>
+                <p>If you choose to sign in, your data is stored in Firebase Firestore, a managed Google Cloud service. All data in transit is encrypted using HTTPS with TLS 1.3. Data at rest is protected using AES-256 encryption.</p>
+                <h3>Security Measures</h3>
+                <p>We implement appropriate technical and organisational safeguards to protect your information against unauthorised access, inadvertent disclosure, alteration, or destruction. Access to stored data is strictly limited to systems and personnel required to operate the Extension.</p>
+            </div>
+
+            <div class="section" id="s4">
+                <h2>4. Data Sharing and Disclosure</h2>
+                <p><strong>We do not sell, rent, license, or otherwise transfer your personal information to any third party for commercial purposes.</strong></p>
+                <p>Data may be shared only in the following strictly limited circumstances:</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Recipient</th><th>Circumstance</th><th>User Control</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Firebase (Google Cloud)</td>
+                                <td>Storage for optional cross-device sync. Governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</td>
+                                <td><span class="badge badge-opt">Opt-in only</span></td>
+                            </tr>
+                            <tr>
+                                <td>Legal authorities</td>
+                                <td>Where required by applicable law, court order, or lawful governmental request.</td>
+                                <td><span class="badge badge-no">Not controllable</span></td>
+                            </tr>
+                            <tr>
+                                <td>Rights protection</td>
+                                <td>Where reasonably necessary to protect the rights, property, or safety of users or the public.</td>
+                                <td><span class="badge badge-no">Not controllable</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section" id="s5">
+                <h2>5. Chrome Permissions</h2>
+                <p>EcoQuery requests only the permissions strictly necessary to deliver its functionality, in accordance with the Chrome Web Store minimum permissions requirement.</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Permission</th><th>Purpose</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>storage</code></td>
+                                <td>Saves usage metrics, goal settings, and preferences locally on your device across browser sessions.</td>
+                            </tr>
+                            <tr>
+                                <td><code>alarms</code></td>
+                                <td>Schedules the daily reset of usage counters at midnight and, if enabled, triggers daily summary notifications.</td>
+                            </tr>
+                            <tr>
+                                <td><code>notifications</code></td>
+                                <td>Delivers optional alerts when you approach your configured daily limit. Disabled by default and requires user activation.</td>
+                            </tr>
+                            <tr>
+                                <td><code>host_permissions</code><br><small style="font-weight:400;color:#767676;">chatgpt.com, chat.openai.com</small></td>
+                                <td>Detects query submission events on these two specific domains to estimate environmental impact. The Extension is active only on these URLs and no others.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section" id="s6">
+                <h2>6. Chrome Web Store Limited Use Policy Compliance</h2>
+                <p>EcoQuery's collection and use of information obtained through Chrome APIs complies fully with the <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use/" target="_blank" rel="noopener">Chrome Web Store User Data Policy</a>, including its Limited Use requirements. Specifically:</p>
+                <ul>
+                    <li><strong>Single purpose:</strong> User data is used solely to provide and improve EcoQuery's stated functionality, which is environmental impact tracking for ChatGPT usage.</li>
+                    <li><strong>Limited transfers:</strong> Data is transferred to third parties only where strictly necessary to deliver this functionality, to comply with applicable law, to protect against fraud or abuse, or as part of a corporate transaction with prior explicit user consent.</li>
+                    <li><strong>No unauthorised human access:</strong> Humans are prohibited from reading user data except where the user has given explicit consent, for security investigation, or to satisfy a legal obligation.</li>
+                    <li><strong>No prohibited uses:</strong> All other uses or transfers of user data including advertising, credit assessment, data brokerage, or resale are strictly prohibited.</li>
+                </ul>
+                <p>In accordance with Limited Use disclosure requirements: <em>"The use of information received from Chrome APIs will adhere to the Chrome Web Store User Data Policy, including the Limited Use requirements."</em></p>
+            </div>
+
+            <div class="section" id="s7">
+                <h2>7. Your Rights and Choices</h2>
+                <ul>
+                    <li><strong>Access:</strong> Your current usage metrics and settings are visible at any time through the Extension popup interface.</li>
+                    <li><strong>Deletion:</strong> Uninstalling the Extension permanently removes all locally stored data from your device. To request deletion of cloud account data, contact us using the details in Section 12. Account data will be permanently deleted within 30 days of your request.</li>
+                    <li><strong>Opt-out of notifications:</strong> Usage alerts may be disabled at any time through the Extension settings panel without affecting core functionality.</li>
+                    <li><strong>Do Not Track:</strong> EcoQuery does not track users across third-party websites. Do Not Track signals are not applicable to this Extension's functionality.</li>
+                </ul>
+            </div>
+
+            <div class="section" id="s8">
+                <h2>8. Data Retention</h2>
+                <ul>
+                    <li><strong>Local data:</strong> Automatically and permanently removed upon uninstallation of the Extension.</li>
+                    <li><strong>Cloud data (account users):</strong> Retained for as long as the account remains active. Upon a deletion request, all associated data is permanently erased from Firebase within 30 days.</li>
+                    <li><strong>Inactive accounts:</strong> Accounts with no recorded activity for more than 24 consecutive months may be subject to deletion following advance notice. All associated data will be permanently removed.</li>
+                </ul>
+            </div>
+
+            <div class="section" id="s9">
+                <h2>9. Children's Privacy</h2>
+                <p>EcoQuery is not directed at, nor intended for use by, individuals under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or legal guardian and believe your child has provided personal information through the Extension, please contact us immediately. We will promptly investigate and delete any such information from our systems.</p>
+            </div>
+
+            <div class="section" id="s10">
+                <h2>10. International Data Transfers</h2>
+                <p>If you enable account-based synchronisation, your information may be transferred to and stored on servers located in the United States or other jurisdictions in which Google operates data centre infrastructure. Such transfers are conducted in accordance with applicable data protection law. By enabling synchronisation, you consent to the international transfer of your data as described herein.</p>
+            </div>
+
+            <div class="section" id="s11">
+                <h2>11. Changes to This Policy</h2>
+                <p>We may revise this Privacy Policy from time to time to reflect changes in our practices, applicable law, or Extension functionality. In the event of a material change, the "Last updated" date at the top of this document will be revised. Your continued use of EcoQuery following publication of a revised policy constitutes your acceptance of the updated terms.</p>
+            </div>
+
+            <div class="section" id="s12">
+                <h2>12. Contact Us</h2>
+                <p>If you have questions, concerns, or requests relating to this Privacy Policy or our data handling practices, please contact us at:</p>
+                <div class="contact-block">
+                    <p><strong>EcoQuery Support</strong></p>
+                    <p>Email: <a href="mailto:ecoqueryofficial@gmail.com">ecoqueryofficial@gmail.com</a></p>
+                    <p style="margin-top:8px;font-size:13px;color:#767676;">Response time: Within 30 calendar days of receipt.</p>
+                </div>
+            </div>
+
+            <div class="helpful">
+                <span>Was this helpful?</span>
+                <button class="helpful-btn" onclick="this.textContent='Thanks!'">Yes</button>
+                <button class="helpful-btn" onclick="this.textContent='Noted'">No</button>
+            </div>
+
+            <div class="page-footer">
+                <div>
+                    <p>2026 EcoQuery. All rights reserved.</p>
+                    <p style="margin-top:4px;">Applies to EcoQuery Chrome Extension v1.3.0 and later.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://developer.chrome.com/docs/webstore/program-policies/" target="_blank" rel="noopener">CWS Policies</a>
+                </div>
+            </div>
+
+        </div><!-- end tab-privacy -->
+
+
+        <!-- ════════════════════════════════
+             SUPPORT TAB
+        ════════════════════════════════ -->
+        <div id="tab-support" class="tab-panel">
+
+            <div class="breadcrumb">
+                <span>EcoQuery</span>
+                <span class="breadcrumb-sep">/</span>
+                <span>Support</span>
+            </div>
+
+            <h1 class="page-title">Support Center</h1>
+            <p class="page-meta">EcoQuery Chrome Extension v1.3.0 &nbsp; Last updated: April 2026</p>
+
+            <p class="intro">Welcome to EcoQuery support. Find answers to common questions, troubleshooting steps, and contact information below. If you cannot find what you are looking for, please reach out directly and we will respond within 30 days.</p>
+
+            <div class="cards">
+                <a class="card" href="#faq">
+                    <div class="card-title">FAQ</div>
+                    <div class="card-desc">Answers to the most common questions about EcoQuery</div>
+                </a>
+                <a class="card" href="#troubleshooting">
+                    <div class="card-title">Troubleshooting</div>
+                    <div class="card-desc">Fix common issues with the extension</div>
+                </a>
+                <a class="card" href="#data-privacy">
+                    <div class="card-title">Data and Privacy</div>
+                    <div class="card-desc">What data is collected and how it is handled</div>
+                </a>
+                <a class="card" href="#contact-support">
+                    <div class="card-title">Contact Us</div>
+                    <div class="card-desc">Get in touch with the support team</div>
+                </a>
+            </div>
+
+            <div class="section" id="getting-started">
+                <h2>Getting Started</h2>
+                <p>EcoQuery tracks the environmental cost of your ChatGPT usage, estimating CO2 emissions, energy consumption, and water usage for every query you send.</p>
+                <h3>Installation</h3>
+                <ol>
+                    <li>Install EcoQuery from the Chrome Web Store.</li>
+                    <li>Click the EcoQuery icon in your Chrome toolbar to open the popup.</li>
+                    <li>Set your daily usage goal (Easy, Medium, Hard, or Custom) in the Settings tab.</li>
+                    <li>Start using ChatGPT. EcoQuery will automatically begin tracking your queries.</li>
+                </ol>
+                <h3>Setting a Daily Goal</h3>
+                <p>Open the extension popup and navigate to Settings. Choose a preset goal or enter a custom number of daily queries. EcoQuery will notify you when you approach your limit if notifications are enabled.</p>
+                <h3>Optional Account Sign-In</h3>
+                <p>EcoQuery works fully without an account. If you use ChatGPT across multiple devices, signing in allows your metrics and preferences to sync automatically. Account creation requires only an email address.</p>
+            </div>
+
+            <div class="section" id="faq">
+                <h2>Frequently Asked Questions</h2>
+
+                <details open>
+                    <summary>How does EcoQuery calculate environmental impact?</summary>
+                    <div class="details-body">
+                        <p>EcoQuery estimates the number of tokens in each ChatGPT query and response, then applies published research-based coefficients to convert those token counts into CO2 emissions (grams), energy consumption (watt-hours), and water usage (millilitres). These are estimates, not exact measurements, as the precise infrastructure of ChatGPT is not publicly disclosed.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Does EcoQuery read my ChatGPT messages?</summary>
+                    <div class="details-body">
+                        <p>No. EcoQuery does not read, store, or transmit the content of your ChatGPT conversations. It only detects that a query was submitted and estimates the number of tokens based on interaction signals. The text of your messages is never accessed by the extension.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Why does the extension only work on ChatGPT?</summary>
+                    <div class="details-body">
+                        <p>EcoQuery is purposely scoped to <code>chatgpt.com</code> and <code>chat.openai.com</code> only. It does not operate on any other website. This is intentional and is reflected in the extension host permissions, which are limited to these two domains.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Do I need an account to use EcoQuery?</summary>
+                    <div class="details-body">
+                        <p>No. All core functionality including tracking, goals, and notifications works without an account. Your data is stored locally on your device. An account is only needed if you want to sync your metrics across multiple devices.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Does EcoQuery reset my data daily?</summary>
+                    <div class="details-body">
+                        <p>Yes. Daily usage metrics including query count, CO2, energy, and water totals reset automatically at midnight local time.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>How do I turn off notifications?</summary>
+                    <div class="details-body">
+                        <p>Open the EcoQuery popup, go to Settings, and toggle off the notifications option. You can re-enable them at any time. Disabling notifications does not affect metric tracking.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Will EcoQuery slow down my browser or ChatGPT?</summary>
+                    <div class="details-body">
+                        <p>No. EcoQuery is lightweight and only performs simple numerical calculations. It does not inject large scripts, modify the ChatGPT interface, or perform background network operations during your conversations.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>How do I delete my data?</summary>
+                    <div class="details-body">
+                        <p>Uninstalling the extension immediately and permanently removes all locally stored data from your device. If you have a signed-in account, contact us at <a href="mailto:ecoqueryofficial@gmail.com">ecoqueryofficial@gmail.com</a> to request deletion of your cloud data. We will complete this within 30 days.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="section" id="troubleshooting">
+                <h2>Troubleshooting</h2>
+
+                <h3>EcoQuery is not tracking my queries</h3>
+                <ol>
+                    <li>Confirm you are using ChatGPT at <code>chatgpt.com</code> or <code>chat.openai.com</code>. EcoQuery does not operate on other domains.</li>
+                    <li>Check that the extension is enabled in Chrome by going to <code>chrome://extensions</code> and confirming EcoQuery is toggled on.</li>
+                    <li>Try refreshing the ChatGPT tab after installing or updating the extension.</li>
+                    <li>Ensure no other extensions are blocking content scripts on chatgpt.com.</li>
+                </ol>
+
+                <h3>The popup shows zero metrics</h3>
+                <p>Metrics reset at midnight. If you have not yet submitted a query today the counter will show zero. Send a message in ChatGPT and return to the popup. Your first query should appear within a few seconds.</p>
+
+                <h3>Notifications are not appearing</h3>
+                <ol>
+                    <li>Check that notifications are enabled in the EcoQuery Settings tab.</li>
+                    <li>Confirm Chrome has permission to show notifications by going to Chrome Settings, then Privacy and security, then Site settings, then Notifications.</li>
+                    <li>Check your operating system notification settings to ensure Chrome is not silenced.</li>
+                </ol>
+
+                <h3>The extension was removed or disabled automatically</h3>
+                <p>Chrome may occasionally disable extensions if it detects an update conflict or policy change. Reinstall EcoQuery from the Chrome Web Store. If the problem persists, please contact us with your Chrome version and a description of the issue.</p>
+
+                <div class="alert">
+                    <strong>Still having issues?</strong> Contact us at <a href="mailto:ecoqueryofficial@gmail.com">ecoqueryofficial@gmail.com</a> and include your Chrome version (found at <code>chrome://settings/help</code>) and a description of the problem.
+                </div>
+            </div>
+
+            <div class="section" id="data-privacy">
+                <h2>Data and Privacy</h2>
+                <p>EcoQuery is designed with privacy as a default. Below is a plain-language summary of what is and is not collected.</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Data type</th><th>Collected</th><th>Where stored</th><th>Shared</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Query count and token estimates</td><td>Yes</td><td>Device / Firebase if signed in</td><td>No</td></tr>
+                            <tr><td>Environmental metrics (CO2, energy, water)</td><td>Yes</td><td>Device / Firebase if signed in</td><td>No</td></tr>
+                            <tr><td>Goal and notification preferences</td><td>Yes</td><td>Device only</td><td>No</td></tr>
+                            <tr><td>Email address</td><td>Optional (sign-in only)</td><td>Firebase</td><td>No</td></tr>
+                            <tr><td>ChatGPT message content</td><td>Never</td><td>Not applicable</td><td>No</td></tr>
+                            <tr><td>Browsing history</td><td>Never</td><td>Not applicable</td><td>No</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>For the full Privacy Policy, click the Privacy Policy tab at the top of this page.</p>
+            </div>
+
+            
+            <div class="section" id="contact-support">
+                <h2>Contact Support</h2>
+                <p>If you have a question, found a bug, or want to request deletion of your account data, please contact us. We read every message and aim to respond within 30 calendar days.</p>
+                <div class="contact-block">
+                    <p><strong>EcoQuery Support</strong></p>
+                    <p>Email: <a href="mailto:ecoqueryofficial@gmail.com">ecoqueryofficial@gmail.com</a></p>
+                    <p style="margin-top:10px;font-size:13px;color:#767676;">When reporting a bug, please include your Chrome version, a description of the issue, and the steps to reproduce it.</p>
+                </div>
+            </div>
+
+            <div class="helpful">
+                <span>Was this helpful?</span>
+                <button class="helpful-btn" onclick="this.textContent='Thanks!'">Yes</button>
+                <button class="helpful-btn" onclick="this.textContent='Noted'">No</button>
+            </div>
+
+            <div class="page-footer">
+                <div>
+                    <p>2026 EcoQuery. All rights reserved.</p>
+                    <p style="margin-top:4px;">Applies to EcoQuery Chrome Extension v1.3.0 and later.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://developer.chrome.com/docs/webstore/program-policies/" target="_blank" rel="noopener">CWS Policies</a>
+                </div>
+            </div>
+
+        </div><!-- end tab-support -->
+
+    </main>
+</div>
+
+<script>
+    function switchTab(tab, btn) {
+        // Update tab buttons
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Update panels
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('tab-' + tab).classList.add('active');
+
+        // Update sidebars
+        document.getElementById('sidebar-privacy').style.display = tab === 'privacy' ? 'block' : 'none';
+        document.getElementById('sidebar-support').style.display = tab === 'support' ? 'block' : 'none';
+
+        // Scroll to top of content
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Re-run scroll observer for new tab
+        setupObserver(tab);
+    }
+
+    function setupObserver(tab) {
+        const navId = 'nav-' + tab;
+        const navEl = document.getElementById(navId);
+        if (!navEl) return;
+        const links = navEl.querySelectorAll('a');
+        const panel = document.getElementById('tab-' + tab);
+        const sectionEls = panel ? panel.querySelectorAll('[id]') : [];
+
+        if (window._observer) window._observer.disconnect();
+
+        window._observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    links.forEach(a => {
+                        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+                    });
+                }
+            });
+        }, { rootMargin: '-15% 0px -75% 0px' });
+
+        sectionEls.forEach(s => window._observer.observe(s));
+    }
+
+    // Init on load
+    setupObserver('privacy');
+</script>
+
+</body>
+</html>
